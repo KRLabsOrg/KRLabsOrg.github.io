@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,24 +16,29 @@
             padding: 0 50px;
             box-sizing: border-box;
         }
+
         header {
             text-align: center;
             padding: 50px 0;
             color: #000;
         }
+
         header h1 {
             margin: 0;
             font-size: 36px;
         }
+
         nav {
             margin-top: 20px;
         }
+
         nav a {
             color: #000;
             text-decoration: none;
             margin: 0 15px;
             font-size: 20px;
         }
+
         .hero {
             display: flex;
             flex-direction: column;
@@ -41,24 +47,73 @@
             height: 50vh;
             text-align: center;
         }
+
         .hero h2 {
             font-size: 32px;
             margin-bottom: 20px;
         }
+
         .content {
             padding: 50px 0;
             text-align: center;
         }
+
         .content h2 {
             margin-bottom: 20px;
             font-size: 28px;
         }
+
         .content p {
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
             text-align: justify;
         }
+
+        .products {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .products h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            border: 1px solid #e0e0e0;
+            padding: 40px 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .product-item h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .product-item p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .product-item ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .product-item ul li {
+            margin: 10px 0;
+        }
+
+        .product-item a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
         footer {
             text-align: center;
             padding: 20px 0;
@@ -66,37 +121,67 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>KR Labs</h1>
         <nav>
             <a href="#about">About Us</a>
+            <a href="#products">Products</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <section class="content" id="about">
         <h2>About Us</h2>
-        <p>KR Labs develops transparent and trustworthy AI solutions for
-        natural language processing (NLP) tasks.
-KR Labs was founded by NLP
-researchers <a href="https://hlt.bme.hu/en/kovacsadam">Ádám Kovács</a> and <a
-href="https://informatics.tuwien.ac.at/people/gabor-recski">Gábor Recski</a>.
-Our open-source technology is based on a novel combination of statistical and rule-based methods developed
-at <a href="https://nlp.ec.tuwien.ac.at/">TUW-NLP</a> and <a href="https://hlt.bme.hu/en/">HLT-Budapest</a>.
-Between 2023 and 2024, KR Labs was incubated in the TU Wien i²ncubator at the
-<a href="https://i2c.tuwien.ac.at/">TU Wien Innovation Incubation Center
-(i²c)</a>.</p> </section>
+        <p>KR Labs develops transparent and trustworthy AI solutions for natural language processing (NLP) tasks.
+            KR Labs was founded by NLP researchers <a href="https://hlt.bme.hu/en/kovacsadam">Ádám Kovács</a> and
+            <a href="https://informatics.tuwien.ac.at/people/gabor-recski">Gábor Recski</a>. Our open-source technology
+            is based on a novel
+            combination of statistical and rule-based methods developed at <a
+                href="https://nlp.ec.tuwien.ac.at/">TUW-NLP</a> and
+            <a href="https://hlt.bme.hu/en/">HLT-Budapest</a>.
+            Between 2023 and 2024, KR Labs was incubated in the TU Wien Innovation Incubation Center (i²c).
+        </p>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2>Our Products</h2>
+        <div class="product-item">
+            <h3>LettuceDetect</h3>
+            <p>
+                LettuceDetect is a hallucination detection framework designed for Retrieval-Augmented Generation (RAG)
+                systems.
+                Built on <a href="https://github.com/AnswerDotAI/ModernBERT" target="_blank">ModernBERT</a>, it
+                identifies unsupported segments in LLM-generated answers in real time.
+                It overcomes the limitations of short context windows and the high computational costs associated with
+                large LLM-based detectors.
+            </p>
+            <ul>
+                <li><strong>Token-Level Detection</strong>: Flags unsupported parts of answers.</li>
+                <li><strong>Long-Context Support</strong>: Processes up to 4K tokens.</li>
+                <li><strong>High Throughput</strong>: 30–60 examples per second on a single GPU.</li>
+                <li><strong>Open Source</strong>: Released under the MIT License.</li>
+            </ul>
+            <p>
+                <a href="https://github.com/KRLabsOrg/LettuceDetect" target="_blank">Learn More on GitHub</a> •
+                <a href="https://pypi.org/project/lettucedetect" target="_blank">Download on PyPI</a> •
+                <a href="https://huggingface.co/KRLabsOrg" target="_blank">View Models on Hugging Face</a>
+            </p>
+        </div>
+    </section>
 
     <section class="content" id="contact">
         <h2>Contact Us</h2>
-        <p><center>Email: <a href="mailto:info@krlabs.eu">info@krlabs.eu</a></center></p>
+        <p>
+            <center>Email: <a href="mailto:info@krlabs.eu">info@krlabs.eu</a></center>
+        </p>
     </section>
 
     <footer>
-    <a href="imprint.html">Imprint</a>
-    
+        <a href="imprint.html">Imprint</a>
     </footer>
 </body>
-</html>
 
+</html>
