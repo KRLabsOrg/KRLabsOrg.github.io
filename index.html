@@ -151,7 +151,8 @@
         <div class="product-item">
             <h3>LettuceDetect</h3>
             <p>
-                LettuceDetect is a hallucination detection framework designed for Retrieval-Augmented Generation (RAG)
+                <b>LettuceDetect</b> is a hallucination detection framework designed for Retrieval-Augmented Generation
+                (RAG)
                 systems.
                 Built on <a href="https://github.com/AnswerDotAI/ModernBERT" target="_blank">ModernBERT</a>, it
                 identifies unsupported segments in LLM-generated answers in real time.
@@ -168,6 +169,26 @@
                 <a href="https://github.com/KRLabsOrg/LettuceDetect" target="_blank">Learn More on GitHub</a> •
                 <a href="https://pypi.org/project/lettucedetect" target="_blank">Download on PyPI</a> •
                 <a href="https://huggingface.co/KRLabsOrg" target="_blank">View Models on Hugging Face</a>
+            </p>
+        </div>
+        <div class="product-item">
+            <h3>Verbatim-RAG</h3>
+            <p>
+                Traditional RAG systems retrieve relevant documents and then allow an
+                LLM to freely generate responses based on that context.
+                This can lead to hallucinations where the model invents facts not present in the source material.
+                <b>Verbatim-RAG</b> is our RAG framework that
+                prevents hallucination by ensuring all generated content is explicitly derived from source documents.
+            </p>
+            <ul>
+                <li><strong>Minimalistic</strong>: We provide a minimalistc end-to-end RAG system and many additional
+                    functionalities that you can integrate into your own system.</li>
+                <li><strong>How it works</strong>: We use extractive models to mark the relevant parts of the context and
+                    then implement dynamic template generation that is used to generate the final response.</li>
+                <li><strong>Open Source</strong>: Released under the MIT License.</li>
+            </ul>
+            <p>
+                <a href="https://github.com/KRLabsOrg/Verbatim-RAG" target="_blank">Learn More on GitHub</a>
             </p>
         </div>
     </section>
