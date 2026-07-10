@@ -1,264 +1,203 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>KR Labs</title>
-        <style>
-            body {
-                font-family: "Courier New", Courier, monospace;
-                font-size: 18px;
-                color: #000;
-                background-color: #fff;
-                max-width: 1280px;
-                margin: 0 auto;
-                padding: 0 50px;
-                box-sizing: border-box;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KR Labs: grounded AI</title>
+    <meta name="description" content="KR Labs builds open-source, transparent NLP technology: hallucination detection, verbatim RAG, and rule-based models. A spin-off of TU Wien." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --ink: #0F0F0F;
+            --paper: #FFFFFF;
+            --graphite: #2A2D33;
+            --slate: #4A5060;
+            --mist: #9CA3AF;
+            --signal: #FF3D5A;
+            --signal-tint: rgb(255 61 90 / 0.12);
+            --rule: #E5E7EB;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ink: #F5F6F8;
+                --paper: #0F1115;
+                --graphite: #D1D5DB;
+                --slate: #8B92A0;
+                --mist: #4A5060;
+                --signal: #FF5A72;
+                --signal-tint: rgb(255 90 114 / 0.16);
+                --rule: #23262D;
             }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--ink);
+            background-color: var(--paper);
+        }
+        a { color: inherit; }
+        .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
-            header {
-                text-align: center;
-                padding: 50px 0;
-                color: #000;
-            }
+        .mono { font-family: "Space Mono", Menlo, monospace; font-weight: 700; }
+        .bracket { color: var(--signal); }
 
-            header h1 {
-                margin: 0;
-                font-size: 36px;
-            }
+        header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 28px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .mark { font-size: 20px; text-decoration: none; }
+        .mark .labs { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+        nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--slate);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        nav a:hover { color: var(--ink); box-shadow: 0 1px 0 var(--signal); }
 
-            nav {
-                margin-top: 20px;
-            }
+        .hero { padding: 72px 0 56px; }
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            font-size: clamp(32px, 5.5vw, 48px);
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            max-width: 18ch;
+        }
+        .hero p {
+            margin-top: 20px;
+            font-size: 19px;
+            color: var(--slate);
+            max-width: 60ch;
+        }
+        .hero p a { color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 var(--signal); }
 
-            nav a {
-                color: #000;
-                text-decoration: none;
-                margin: 0 15px;
-                font-size: 20px;
-            }
+        h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            letter-spacing: -0.015em;
+            margin-bottom: 8px;
+        }
+        .section { padding: 32px 0; }
+        .section > .lede { color: var(--slate); margin-bottom: 28px; max-width: 65ch; }
+        .section > .lede a { color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 var(--signal); }
 
-            .hero {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 50vh;
-                text-align: center;
-            }
+        .project {
+            border-top: 1px solid var(--rule);
+            padding: 32px 0;
+        }
+        .project h3 { font-size: 20px; margin-bottom: 2px; }
+        .project .name a { text-decoration: none; }
+        .project .name a:hover .word { box-shadow: 0 1px 0 var(--signal); }
+        .project .tag {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            color: var(--graphite);
+            margin: 6px 0 10px;
+        }
+        .project p.desc { color: var(--slate); max-width: 68ch; }
+        .links { margin-top: 14px; font-size: 15px; font-weight: 500; }
+        .links a { color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 var(--signal); }
+        .links span.sep { color: var(--mist); margin: 0 10px; }
 
-            .hero h2 {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
+        .more { list-style: none; }
+        .more li { margin: 10px 0; color: var(--slate); }
+        .more a { color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 var(--signal); }
 
-            .content {
-                padding: 50px 0;
-                text-align: center;
-            }
-
-            .content h2 {
-                margin-bottom: 20px;
-                font-size: 28px;
-            }
-
-            .content p {
-                max-width: 800px;
-                margin: 0 auto;
-                line-height: 1.6;
-                text-align: justify;
-            }
-
-            .products {
-                padding: 50px 0;
-                text-align: center;
-            }
-
-            .products h2 {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
-
-            .product-item {
-                border: 1px solid #e0e0e0;
-                padding: 40px 20px;
-                margin: 20px auto;
-                max-width: 800px;
-                text-align: left;
-            }
-
-            .product-item h3 {
-                font-size: 28px;
-                margin-bottom: 15px;
-            }
-
-            .product-item p {
-                font-size: 18px;
-                line-height: 1.6;
-            }
-
-            .product-item ul {
-                list-style-type: none;
-                padding: 0;
-                font-size: 18px;
-            }
-
-            .product-item ul li {
-                margin: 10px 0;
-            }
-
-            .product-item a {
-                color: #000;
-                text-decoration: none;
-                font-weight: bold;
-            }
-
-            footer {
-                text-align: center;
-                padding: 20px 0;
-                margin-top: 50px;
-            }
-        </style>
-    </head>
-
-    <body>
+        footer {
+            border-top: 1px solid var(--rule);
+            margin-top: 48px;
+            padding: 32px 0 48px;
+            font-size: 15px;
+            color: var(--slate);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        footer a { color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 var(--signal); }
+    </style>
+</head>
+<body>
+    <div class="wrap">
         <header>
-            <h1>KR Labs</h1>
+            <a class="mark mono" href="/"><span class="bracket">[</span>KR<span class="bracket">]</span> <span class="labs">Labs</span></a>
             <nav>
-                <a href="#about">About Us</a>
-                <a href="#products">Products</a>
-                <a href="#contact">Contact</a>
+                <a href="https://github.com/KRLabsOrg">GitHub</a>
+                <a href="https://huggingface.co/KRLabsOrg">Hugging Face</a>
+                <a href="https://krlabs.eu">krlabs.eu</a>
+                <a href="mailto:contact@krlabs.eu">Contact</a>
             </nav>
         </header>
 
-        <section class="content" id="about">
-            <h2>About Us</h2>
-            <p>
-                KR Labs develops transparent and trustworthy AI solutions for
-                natural language processing (NLP) applications. Founded by NLP
-                researchers
-                <a href="https://hlt.bme.hu/en/kovacsadam">Ádám Kovács</a> and
-                <a href="https://informatics.tuwien.ac.at/people/gabor-recski"
-                    >Gábor Recski</a
-                >, with AI business leader
-                <a href="https://www.linkedin.com/in/ashishanandroy/"
-                    >Ashish Roy</a
-                >, the company bridges academic innovation with enterprise
-                needs. Our products are designed to empower AI application
-                developers, organizations, and individual users. We build
-                open-source technology that combines novel statistical and
-                rule-based methods, originally developed at
-                <a href="https://nlp.ec.tuwien.ac.at/">TUW-NLP</a> and
-                <a href="https://hlt.bme.hu/en/">HLT-Budapest</a>. From 2023 to
-                2024, KR Labs was incubated at the TU Wien Innovation Incubation
-                Center (i²c).
-            </p>
+        <section class="hero">
+            <h1>Grounded AI for teams that cannot afford made-up answers.</h1>
+            <p>KR Labs is a spin-off of <a href="https://informatics.tuwien.ac.at/">TU Wien</a> building open-source, transparent NLP technology. We publish what we ship, and ship what we publish.</p>
         </section>
 
-        <!-- Products Section -->
-        <section class="products" id="products">
-            <h2>Our Products</h2>
-            <div class="product-item">
-                <h3>Lettuce<span style="color: #ff5757">Detect</span></h3>
-                <p>
-                    <b>LettuceDetect</b> is a hallucination detection framework
-                    designed for Retrieval-Augmented Generation (RAG) systems.
-                    Built on
-                    <a
-                        href="https://github.com/AnswerDotAI/ModernBERT"
-                        target="_blank"
-                        >ModernBERT</a
-                    >, it identifies unsupported segments in LLM-generated
-                    answers in real time. It overcomes the limitations of short
-                    context windows and the high computational costs associated
-                    with large LLM-based detectors.
-                </p>
-                <ul>
-                    <li>
-                        <strong>Token-Level Detection</strong>: Flags
-                        unsupported parts of answers.
-                    </li>
-                    <li>
-                        <strong>Long-Context Support</strong>: Processes up to
-                        4K tokens.
-                    </li>
-                    <li>
-                        <strong>High Throughput</strong>: 30–60 examples per
-                        second on a single GPU.
-                    </li>
-                    <li>
-                        <strong>Open Source</strong>: Released under the MIT
-                        License.
-                    </li>
-                </ul>
-                <p>
-                    <a
-                        href="https://github.com/KRLabsOrg/LettuceDetect"
-                        target="_blank"
-                        >Learn More on GitHub</a
-                    >
-                    •
-                    <a
-                        href="https://pypi.org/project/lettucedetect"
-                        target="_blank"
-                        >Download on PyPI</a
-                    >
-                    •
-                    <a href="https://huggingface.co/KRLabsOrg" target="_blank"
-                        >View Models on Hugging Face</a
-                    >
+        <section class="section" id="projects">
+            <h2>Open-source projects</h2>
+            <p class="lede">Everything below is on <a href="https://github.com/KRLabsOrg">GitHub</a>, with models and datasets on Hugging Face.</p>
+
+            <div class="project">
+                <h3 class="name mono"><a href="https://github.com/KRLabsOrg/LettuceDetect"><span class="bracket">[</span><span class="word">lettucedetect</span><span class="bracket">]</span></a></h3>
+                <p class="tag">Hallucination detection for AI outputs. Flags ungrounded claims before they ship.</p>
+                <p class="desc">Span-level detection of unsupported content in RAG answers, generated code, and agentic tool output. Compact encoder models that outperform prompt-based judges at a fraction of the cost, in seven languages.</p>
+                <p class="links">
+                    <a href="https://github.com/KRLabsOrg/LettuceDetect">GitHub</a><span class="sep">·</span>
+                    <a href="https://krlabsorg.github.io/LettuceDetect/">Docs</a><span class="sep">·</span>
+                    <a href="https://pypi.org/project/lettucedetect/">PyPI</a><span class="sep">·</span>
+                    <a href="https://huggingface.co/KRLabsOrg">Models</a><span class="sep">·</span>
+                    <a href="https://arxiv.org/abs/2502.17125">Paper</a>
                 </p>
             </div>
-            <div class="product-item">
-                <h3>Verbatim<span style="color: #ff5757">RAG</span></h3>
-                <p>
-                    Traditional RAG systems retrieve relevant documents and then
-                    allow an LLM to freely generate responses based on that
-                    context. This can lead to hallucinations where the model
-                    invents facts not present in the source material.
-                    <b>VerbatimRAG</b> is our RAG framework that prevents
-                    hallucination by ensuring all generated content is
-                    explicitly derived from source documents.
+
+            <div class="project">
+                <h3 class="name mono"><a href="https://github.com/KRLabsOrg/verbatim-rag"><span class="bracket">[</span><span class="word">verbatim</span><span class="bracket">]</span></a></h3>
+                <p class="tag">Retrieval-augmented generation with span-level attribution.</p>
+                <p class="desc">VerbatimRAG prevents hallucination by construction: extractive models select the relevant source spans, and the LLM only fills templates around them, so every part of an answer traces back to a verbatim source span.</p>
+                <p class="links">
+                    <a href="https://github.com/KRLabsOrg/verbatim-rag">GitHub</a><span class="sep">·</span>
+                    <a href="https://github.com/KRLabsOrg/acl-verbatim">ACL Anthology demo</a>
                 </p>
-                <ul>
-                    <li>
-                        <strong>Minimalistic</strong>: We provide a minimalistc
-                        end-to-end RAG system and many additional
-                        functionalities that you can integrate into your own
-                        solution.
-                    </li>
-                    <li>
-                        <strong>How it works</strong>: We use extractive models
-                        to mark the relevant parts of the context and then
-                        implement dynamic template generation that is used to
-                        generate the final response.
-                    </li>
-                    <li>
-                        <strong>Open Source</strong>: Released under the MIT
-                        License.
-                    </li>
-                </ul>
-                <p>
-                    <a
-                        href="https://github.com/KRLabsOrg/Verbatim-RAG"
-                        target="_blank"
-                        >Learn More on GitHub</a
-                    >
+            </div>
+
+            <div class="project">
+                <h3 class="name mono"><a href="https://github.com/KRLabsOrg/rulechef"><span class="bracket">[</span><span class="word">rulechef</span><span class="bracket">]</span></a></h3>
+                <p class="tag">Learn rule-based models from examples using LLM-powered synthesis.</p>
+                <p class="desc">You provide labeled examples, RuleChef generates regex, code, or spaCy rules, and those rules run locally with no LLM at inference time: fast, deterministic, and inspectable.</p>
+                <p class="links">
+                    <a href="https://github.com/KRLabsOrg/rulechef">GitHub</a><span class="sep">·</span>
+                    <a href="https://krlabsorg.github.io/rulechef/">Docs</a><span class="sep">·</span>
+                    <a href="https://pypi.org/project/rulechef/">PyPI</a>
                 </p>
             </div>
         </section>
 
-        <section class="content" id="contact">
-            <h2>Contact Us</h2>
-            <p>
-                <center>
-                    Email: <a href="mailto:info@krlabs.eu">contact@krlabs.eu</a>
-                </center>
-            </p>
+        <section class="section" id="more">
+            <h2>Also on our GitHub</h2>
+            <ul class="more">
+                <li><a href="https://github.com/KRLabsOrg/squeez">squeez</a>: squeeze verbose LLM agent tool output down to only the relevant lines</li>
+                <li><a href="https://github.com/KRLabsOrg/RAGFactChecker">RAGFactChecker</a>: triplet-based fact checking for RAG answers</li>
+                <li><a href="https://github.com/KRLabsOrg/verbatim-mcp">verbatim-mcp</a>: MCP server for querying academic papers via VerbatimRAG</li>
+            </ul>
         </section>
 
         <footer>
-            <a href="imprint.html">Imprint</a>
+            <span>KR Labs GmbH, Vienna · <a href="mailto:contact@krlabs.eu">contact@krlabs.eu</a></span>
+            <span><a href="imprint.html">Imprint</a></span>
         </footer>
-    </body>
+    </div>
+</body>
 </html>
